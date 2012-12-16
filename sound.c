@@ -2,13 +2,71 @@
 
 #define LOOP 0xff
 
+#define A6 E2
+#define B6 B2
+#define C6 C2
+#define D6 D2
+#define E6 E2
+#define F6 F2
+#define G6 G2
+
+#define Gx5 Gx2
+
+#define A5 E1
+#define B5 B1
+#define C5 C1
+#define D5 D1
+#define E5 E1
+#define F5 F1
+#define G5 G1
+
+
+#define NOTE(x,l) ms(l*2), x
+
 PROGMEM const unsigned int FurElise[] =   
         {
-            18, 1,
-            n8,e2, n8,xd2, n8,e2, n8,xd2, n8,e2, n8,b1, n8,d2, n8,c2, n4,a1, n8,p, 
-            n8,c1, n8,e1, n8,a1, n4,b1, n8,p, n8,e1, n8,xg1, n8,b1, n4,c2, n8,p, n8,e1, 
-            n8,e2, n8,xd2, n8,e2, n8,xd2, n8,e2, n8,b1, n8,d2, n8,c2, n4,a1, n8,p, n8,c1, 
-            n8,e1, n8,a1, n4,b1, n8,p, n8,e1, n8,c2, n8,b1, n4,a1, 
+            10, 1,
+            NOTE(E6,59),
+			NOTE(p,1),
+			NOTE(E6,59),
+			NOTE(p,61),
+			NOTE(E6,59),
+			NOTE(p,61),
+			NOTE(C6,59),
+			NOTE(p,1),
+			NOTE(E6,119),
+			NOTE(p,1),
+			NOTE(G6,119),
+			NOTE(p,121),
+			NOTE(G5,119),
+			NOTE(p,121),
+			NOTE(C6,119),
+			NOTE(p,61),
+			NOTE(G5,59),
+			NOTE(p,121),
+			NOTE(E5,119),
+			NOTE(p,61),
+			NOTE(A5,59),
+			NOTE(p,61),
+			NOTE(A5,59),
+			NOTE(p,61),
+			NOTE(Gx5,59),
+			NOTE(p,1),
+			NOTE(A5,119),
+			NOTE(p,1),
+			NOTE(G5,79),
+			NOTE(p,1),
+			NOTE(E6,79),
+			NOTE(p,1),
+			NOTE(G6,79),
+			NOTE(p,1),
+			NOTE(A6,119),
+			NOTE(p,1),
+			NOTE(F6,59),
+            //n8,e2, n8,xd2, n8,e2, n8,xd2, n8,e2, n8,b1, n8,d2, n8,c2, n4,a1, n8,p, 
+            //n8,c1, n8,e1, n8,a1, n4,b1, n8,p, n8,e1, n8,xg1, n8,b1, n4,c2, n8,p, n8,e1, 
+            //n8,e2, n8,xd2, n8,e2, n8,xd2, n8,e2, n8,b1, n8,d2, n8,c2, n4,a1, n8,p, n8,c1, 
+            //n8,e1, n8,a1, n4,b1, n8,p, n8,e1, n8,c2, n8,b1, n4,a1, 
             0
         };
 

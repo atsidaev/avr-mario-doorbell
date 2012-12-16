@@ -11,8 +11,8 @@ int main(void)
 	SOUND_Init();
 	sei();
 	
-	SOUND_SetSong(0);
-	SOUND_Com(SOUND_PLAY);
+	SOUND_PlaySong(0);
+	//SOUND_Com(SOUND_PLAY);
 	while (1)
 	{
 		
