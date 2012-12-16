@@ -13,49 +13,20 @@ PROGMEM const unsigned int FurElise[] =
         };
 
 
-PROGMEM const unsigned int Mozart[] = 
-        {
-            16, 1,
-            n16, xf1, n16, e1, n16,xd1, n16,e1, n4,g1, n16,a1, n16,g1, n16,xf1, n16,g1,
-            n4,b1, n16,c2, n16,b1, n16,xa1, n16,b1, n16,xf2, n16,e2, n16,xd2, n16,e2, 
-            n16,xf2, n16,e2, n16,xd2, n16,e2, n4,g2, n8,e2, n8,g2, n32,d2, n32,e2, 
-            n16,xf2, n8,e2, n8,d2, n8,e2, n32,d2, n32,e2, n16,xf2, n8,e2, n8,d2, n8,e2, 
-            n32,d2, n32,e2, n16,xf2, n8,e2, n8,d2, n8,xc2, n4,b1, 
-            0
-        };
-
-PROGMEM const unsigned int Minuet[] = 
-        {
-            18, 1,
-            n4,d2, n8,g1, n8,a1, n8,b1, n8,c2, n4,d2, n4,g1, n4,g1, n4,e2, n8,c2, 
-            n8,d2, n8,e2, n8,xf2, n4,g2, n4,g1, n4,g1, n4,c2, n8,d2, n8,c2, n8,b1, 
-            n8,a1, n4,b1, n8,c2, n8,b1, n8,a1, n8,g1, n4,xf1, n8,g1, n8,a1, n8,b1, 
-            n8,g1, n4,b1, n2,a1, 
-            0
-        };
-
-
-PROGMEM const unsigned int Sirene2[] = 
-        {
-            1, LOOP,
-            ms(500), c2, ms(500), g2, 
-            0
-        };
-
 //-----------------------------звуковой модуль----------------------------------
 //указатели на регистры порта
 #define PIN_SOUND (*(&PORT_SOUND-2))
 #define DDR_SOUND (*(&PORT_SOUND-1))
 
 //заглушка - пустая мелодия
-PROGMEM unsigned int Empty[] = 
+const PROGMEM unsigned int Empty[] = 
         {
             1, 1,
             n4, p,
             0
         };
 
-PROGMEM unsigned int PROGMEM* melody[] = {Empty, FurElise, Mozart, Minuet, Sirene2};
+PGM_P const melody[] PROGMEM = { FurElise };
 
 //переменные звукового модуля
 volatile static unsigned int *pSong;
@@ -88,11 +59,12 @@ void SOUND_Init(void)
   PORT_SOUND &= ~(1<<PINX_SOUND);
   DDR_SOUND |= (1<<PINX_SOUND);
   
-  //настройка таймера T2
-  TIMSK |= (1<<TOIE2);   
-  TCCR2 = (0<<WGM01)|(0<<WGM00)|(0<<CS02)|(0<<CS01)|(1<<CS00);  //режим - нормал, прескалер - 
-  TCNT2 = 0;    
-  OCR2 = 0;
+  //настройка таймера T0
+  TIMSK0 |= (1<<TOIE0);   
+  TCCR0A = (0<<WGM01)|(0<<WGM00);  //режим - нормал, прескалер - 
+  TCCR0B = (0<<CS02)|(0<<CS01)|(1<<CS00);
+  TCNT0 = 0;    
+  OCR0A = 0;
    
   //инициализация переменных
   pSong = (unsigned int *)pgm_read_word(&(Empty));
@@ -127,7 +99,7 @@ unsigned char saveSreg = SREG;
     /*команда стоп:*/
     case SOUND_STOP:
       state = SOUND_STOP;
-      TIMSK &= ~(1<<OCIE2);
+      TIMSK0 &= ~(1<<OCIE0A);
       PORT_SOUND &= ~(1<<PINX_SOUND);
       break;
       
@@ -135,7 +107,7 @@ unsigned char saveSreg = SREG;
     case SOUND_PLAY:
       if (state == SOUND_PAUSE){
         state = SOUND_PLAY;          
-        TIMSK |= (1<<OCIE2);
+        TIMSK0 |= (1<<OCIE0A);
       }
       else {
       #ifndef SOUND_BPM  
@@ -145,14 +117,14 @@ unsigned char saveSreg = SREG;
         repeat = pgm_read_word(&(pSong[SOUND_REPEAT_SONG]));
         durationNote = 0;
         state = SOUND_PLAY;          
-        TIMSK |= (1<<OCIE2);        
+        TIMSK0 |= (1<<OCIE0A);        
       }
       break;  
       
       /*команда пауза*/ 
       case SOUND_PAUSE:
         state = SOUND_PAUSE;  
-        TIMSK &= ~(1<<OCIE2);
+        TIMSK0 &= ~(1<<OCIE0A);
       break;
       
     default:
@@ -174,11 +146,8 @@ void SOUND_PlaySong(unsigned char numSong)
    repeat = pgm_read_word(&(pSong[SOUND_REPEAT_SONG]));
    durationNote = 0;
    state = SOUND_PLAY;          
-   TIMSK |= (1<<OCIE2);       
+   TIMSK0 |= (1<<OCIE0A);       
 }
-
-
-
 
 inline static void SOUND_Duration(void)
 {
@@ -207,7 +176,7 @@ inline static void SOUND_Duration(void)
           statReg &= ~(1<<SOUND_VOLUME);
         }
         indexNote++;
-        TIFR |=(1<<OCF2); //вот здесь сомнения
+        TIFR0 |=(1<<OCF0A); //вот здесь сомнения
       }
       else{
         if (repeat == LOOP){
@@ -218,7 +187,7 @@ inline static void SOUND_Duration(void)
         repeat--;
         if (!repeat){
           state = SOUND_STOP;
-          TIMSK &= ~(1<<OCIE2); 
+          TIMSK0 &= ~(1<<OCIE0A); 
           PORT_SOUND &= ~(1<<PINX_SOUND);
           return;
         }
@@ -250,20 +219,20 @@ inline static void SOUND_Tone(void)
     tone -= SOUND_COUNTER_CAP;
   }
   else {
-    OCR2 = tone;
+    OCR0A = tone;
     statReg |= (1<<SOUND_GEN);
   }
 }
 
 //прерывания таймера Т2_____________________________________
-ISR(TIMER2_OVF_vect)
+ISR(TIM0_OVF_vect)
 {
   SOUND_Duration();
-  BUT_Debrief();
+  //BUT_Debrief();
 }
 
 
-ISR(TIMER2_COMP_vect)
+ISR(TIM0_COMPA_vect)
 {
   SOUND_Tone();
 }
