@@ -2,7 +2,7 @@
 
 #define LOOP 0xff
 
-#define A6 E2
+#define A6 A2
 #define B6 B2
 #define C6 C2
 #define D6 D2
@@ -11,6 +11,8 @@
 #define G6 G2
 
 #define Gx5 Gx2
+#define Ax6 Ax2
+#define Ax5 Ax1
 
 #define A5 E1
 #define B5 B1
@@ -21,52 +23,191 @@
 #define G5 G1
 
 
-#define NOTE(x,l) ms(l*2), x
+#define NOTE(x,l) ms(l), (x == P ? P : x*3)
+
+//~ E,E,E,C,E,G,G,C,G,E,A,B,A#,G,E,G,A,F,G,E ,C,D,B,C,G,E,A,B,A#, G,E,G,A,F,G,E,C,D,B
+
+//~ G,F#,F,D#,E,G#,A,,C,A,C,D,G,F#,F,E,C,C,C ,G ,F#, F,D#,E,G#A,C,A,C,D,D#,D,C
+
+//~ C,C,C,C,D,E,C,A,G,C,C,C,C,D,E,C,C,C,C,D, E,C, A,G,E,E,E,C,E,G,G,E,C,G,G#,A,F,F,A,B,A,A , A,G, F,E,C,A,G,E,C,G,G#,A,F,F,A,B,F,F,F,E,D,C
+
+//const char simpsons[] PROGMEM = "d=4,o=5,b=160:c.6,e6,f#6,8a6,g.6,e6,c6,8a,8f#,8f#,8f#,2g,8p,8p,8f#,8f#,8f#,8g,a#.,8c6,8c6,8c6,c6";
 
 PROGMEM const unsigned int FurElise[] =   
         {
-            10, 1,
-            NOTE(E6,59),
-			NOTE(p,1),
-			NOTE(E6,59),
-			NOTE(p,61),
-			NOTE(E6,59),
-			NOTE(p,61),
-			NOTE(C6,59),
-			NOTE(p,1),
-			NOTE(E6,119),
-			NOTE(p,1),
-			NOTE(G6,119),
-			NOTE(p,121),
-			NOTE(G5,119),
-			NOTE(p,121),
-			NOTE(C6,119),
-			NOTE(p,61),
-			NOTE(G5,59),
-			NOTE(p,121),
-			NOTE(E5,119),
-			NOTE(p,61),
-			NOTE(A5,59),
-			NOTE(p,61),
-			NOTE(A5,59),
-			NOTE(p,61),
-			NOTE(Gx5,59),
-			NOTE(p,1),
-			NOTE(A5,119),
-			NOTE(p,1),
-			NOTE(G5,79),
-			NOTE(p,1),
-			NOTE(E6,79),
-			NOTE(p,1),
-			NOTE(G6,79),
-			NOTE(p,1),
-			NOTE(A6,119),
-			NOTE(p,1),
-			NOTE(F6,59),
-            //n8,e2, n8,xd2, n8,e2, n8,xd2, n8,e2, n8,b1, n8,d2, n8,c2, n4,a1, n8,p, 
-            //n8,c1, n8,e1, n8,a1, n4,b1, n8,p, n8,e1, n8,xg1, n8,b1, n4,c2, n8,p, n8,e1, 
-            //n8,e2, n8,xd2, n8,e2, n8,xd2, n8,e2, n8,b1, n8,d2, n8,c2, n4,a1, n8,p, n8,c1, 
-            //n8,e1, n8,a1, n4,b1, n8,p, n8,e1, n8,c2, n8,b1, n4,a1, 
+NOTE(f(1046), 491),
+NOTE(P, 70),
+NOTE(f(1318), 328),
+NOTE(P, 46),
+NOTE(f(1479), 328),
+NOTE(P, 46),
+NOTE(f(1760), 163),
+NOTE(P, 23),
+NOTE(f(1567), 491),
+NOTE(P, 70),
+NOTE(f(1318), 328),
+NOTE(P, 46),
+NOTE(f(1046), 328),
+NOTE(P, 46),
+NOTE(f(880), 163),
+NOTE(P, 23),
+NOTE(f(739), 163),
+NOTE(P, 23),
+NOTE(f(739), 163),
+NOTE(P, 23),
+NOTE(f(739), 163),
+NOTE(P, 23),
+NOTE(f(783), 656),
+NOTE(P, 93),
+NOTE(P, 187),
+NOTE(P, 187),
+NOTE(f(739), 163),
+NOTE(P, 23),
+NOTE(f(739), 163),
+NOTE(P, 23),
+NOTE(f(739), 163),
+NOTE(P, 23),
+NOTE(f(783), 163),
+NOTE(P, 23),
+NOTE(f(932), 491),
+NOTE(P, 70),
+NOTE(f(1046), 163),
+NOTE(P, 23),
+NOTE(f(1046), 163),
+NOTE(P, 23),
+NOTE(f(1046), 163),
+NOTE(P, 23),
+NOTE(f(1046), 328),
+NOTE(P, 46),
+
+
+           
+           //~ NOTE(E6,16),
+			//~ NOTE(E6,16),
+			//~ NOTE(P,32),
+			//~ NOTE(E6,8),
+			//~ NOTE(C6,16),
+			//~ NOTE(E6,8),
+			//~ NOTE(G6,8),
+			//~ NOTE(P,8),
+			//~ NOTE(G6,8),
+			//~ NOTE(P,8),
+			//~ NOTE(C6,8),
+			//~ NOTE(P,16),
+			//~ NOTE(G6,8),
+			//~ NOTE(P,16),
+			//~ NOTE(E6,8),
+			//~ NOTE(P,16),
+			//~ NOTE(A6,8),
+			//~ NOTE(B6,8),
+			//~ NOTE(Ax6,16),
+			//~ NOTE(A6,8),
+			//~ NOTE(G6,16),
+			//~ NOTE(E6,16),
+			//~ NOTE(G6,16),
+			//~ NOTE(A6,8),
+			//~ NOTE(F6,16),
+			//~ NOTE(G6,8),
+			//~ NOTE(E6,8),
+			//~ NOTE(C6,16),
+			//~ NOTE(D6,16),
+			//~ NOTE(B6,8),
+			//~ NOTE(P,16),
+			//~ NOTE(C6,8),
+			//~ NOTE(P,16),
+			//~ NOTE(G6,8),
+			//~ NOTE(P,16),
+			//~ NOTE(E6,8),
+			//~ NOTE(P,16),
+			//~ NOTE(A,8),
+			//~ NOTE(B,8),
+			//~ NOTE(A#,16),
+			//~ NOTE(A,8),
+			//~ NOTE(G.,16),
+			//~ NOTE(E6,16),
+			//~ NOTE(G6,16),
+			//~ NOTE(A6,8),
+			//~ NOTE(F6,16),
+			//~ NOTE(G6,8),
+			//~ NOTE(E6,8),
+			//~ NOTE(C6,16),
+			//~ NOTE(D6,16),
+			//~ NOTE(B,8),
+			//~ NOTE(P,8),
+			//~ NOTE(G6,16),
+			//~ NOTE(F#6,16),
+			//~ NOTE(F6,16),
+			//~ NOTE(D#6,16),
+			//~ NOTE(P,16),
+			//~ NOTE(E6,16),
+			//~ NOTE(P,16),
+			//~ NOTE(G#,16),
+			//~ NOTE(A,16),
+			//~ NOTE(C6,16),
+			//~ NOTE(P,16),
+			//~ NOTE(A,16),
+			//~ NOTE(C6,16),
+			//~ NOTE(D6,16),
+			//~ NOTE(P,8),
+			//~ NOTE(G6,16),
+			//~ NOTE(F#6,16),
+			//~ NOTE(F6,16),
+			//~ NOTE(D#6,16),
+			//~ NOTE(P,16),
+			//~ NOTE(E6,16),
+			//~ NOTE(P,16),
+			//~ NOTE(C7,16),
+			//~ NOTE(P,16),
+			//~ NOTE(C7,16),
+			//~ NOTE(C7,16)
+          
+            //~ NOTE(p, 100),
+            //~ NOTE(E6,59),
+			//~ NOTE(p,10),
+			//~ NOTE(E6,59),
+			//~ NOTE(p,61),
+			//~ NOTE(E6,59),
+			//~ NOTE(p,61),
+			//~ NOTE(C6,59),
+			//~ NOTE(p,1),
+			//~ NOTE(E6,119),
+			//~ NOTE(p,1),
+			//~ NOTE(G6,119),
+			//~ NOTE(p,121),
+			//~ NOTE(G5,119),
+			//~ NOTE(p,121),
+			//~ 
+			//~ NOTE(C6,119),
+			//~ NOTE(p,61),
+			//~ NOTE(G5,59),
+			//~ NOTE(p,121),
+			//~ NOTE(E5,119),
+			//~ NOTE(p,61),
+			//~ NOTE(A5,59),
+			//~ NOTE(p,61),
+			//~ NOTE(B5,59),
+			//~ NOTE(p,61),
+			
+			//~ NOTE(Ax5,59),
+			//~ NOTE(p,61),
+			//~ NOTE(Gx5,59),
+			//~ NOTE(p,1),
+			//~ NOTE(A5,119),
+			//~ NOTE(p,1),
+			//~ NOTE(G5,79),
+			//~ NOTE(p,1),
+			//~ NOTE(E6,79),
+			//~ NOTE(p,1),
+			//~ NOTE(G6,79),
+			//~ NOTE(p,1),
+			//~ NOTE(A6,119),
+			//~ NOTE(p,1),
+			//~ NOTE(F6,59),
+			//~ 
+            //~ n8,e2, n8,xd2, n8,e2, n8,xd2, n8,e2, n8,b1, n8,d2, n8,c2, n4,a1, n8,p, 
+            //~ n8,c1, n8,e1, n8,a1, n4,b1, n8,p, n8,e1, n8,xg1, n8,b1, n4,c2, n8,p, n8,e1, 
+            //~ n8,e2, n8,xd2, n8,e2, n8,xd2, n8,e2, n8,b1, n8,d2, n8,c2, n4,a1, n8,p, n8,c1, 
+            //~ n8,e1, n8,a1, n4,b1, n8,p, n8,e1, n8,c2, n8,b1, n4,a1, 
             0
         };
 
@@ -75,14 +216,6 @@ PROGMEM const unsigned int FurElise[] =
 //указатели на регистры порта
 #define PIN_SOUND (*(&PORT_SOUND-2))
 #define DDR_SOUND (*(&PORT_SOUND-1))
-
-//заглушка - пустая мелодия
-const PROGMEM unsigned int Empty[] = 
-        {
-            1, 1,
-            n4, p,
-            0
-        };
 
 PGM_P const melody[] PROGMEM = { FurElise };
 
@@ -93,7 +226,6 @@ volatile static unsigned int  durationNote = 0;
 volatile static unsigned int  toneNote = 0; 
 volatile static unsigned char indexNote = 0;
 volatile static unsigned char statReg = 0;
-volatile static unsigned char repeat = 0;
 
 #ifndef SOUND_BPM  
   static unsigned char bpm = 0;
@@ -104,9 +236,7 @@ volatile static unsigned char repeat = 0;
 #define SOUND_VOLUME     0
 #define SOUND_GEN        1
 
-#define SOUND_BPM_SONG    0
-#define SOUND_REPEAT_SONG 1
-#define SOUND_START_SONG  2
+#define SOUND_START_SONG  0
 #define SOUND_COUNTER_CAP 256
 #define SOUND_PROG_COUNTER 31
   
@@ -125,11 +255,10 @@ void SOUND_Init(void)
   OCR0A = 0;
    
   //инициализация переменных
-  pSong = (unsigned int *)pgm_read_word(&(Empty));
+  pSong = (unsigned int *)pgm_read_word(&(FurElise));
   state = SOUND_STOP;
   durationNote = 0;
   toneNote = 0;
-  repeat = 0;
   indexNote = 0;
   statReg = 0;
 #ifndef SOUND_BPM  
@@ -137,58 +266,11 @@ void SOUND_Init(void)
 #endif
 }
 
-
 void SOUND_SetSong(unsigned char numSong)
 {
     if (numSong <= SOUND_AMOUNT_MELODY) {
       pSong = (unsigned int *)pgm_read_word(&(melody[numSong]));
     }
-}
-
-
-
-//обработчик команд звукового модуля
- void SOUND_Com(unsigned char com)
-{
-unsigned char saveSreg = SREG;
-  cli();
-  switch (com){
-    
-    /*команда стоп:*/
-    case SOUND_STOP:
-      state = SOUND_STOP;
-      TIMSK0 &= ~(1<<OCIE0A);
-      PORT_SOUND &= ~(1<<PINX_SOUND);
-      break;
-      
-   /*команда воспроизведение*/
-    case SOUND_PLAY:
-      if (state == SOUND_PAUSE){
-        state = SOUND_PLAY;          
-        TIMSK0 |= (1<<OCIE0A);
-      }
-      else {
-      #ifndef SOUND_BPM  
-        bpm = pgm_read_word(&(pSong[SOUND_BPM_SONG]));
-      #endif
-        indexNote = SOUND_START_SONG;
-        repeat = pgm_read_word(&(pSong[SOUND_REPEAT_SONG]));
-        durationNote = 0;
-        state = SOUND_PLAY;          
-        TIMSK0 |= (1<<OCIE0A);        
-      }
-      break;  
-      
-      /*команда пауза*/ 
-      case SOUND_PAUSE:
-        state = SOUND_PAUSE;  
-        TIMSK0 &= ~(1<<OCIE0A);
-      break;
-      
-    default:
-      break;
-  }
-  SREG = saveSreg;
 }
 
 //проиграть мелодию под номером numSong
@@ -201,7 +283,6 @@ void SOUND_PlaySong(unsigned char numSong)
      bpm = pgm_read_word(&(pSong[SOUND_BPM_SONG]));
    #endif
    indexNote = SOUND_START_SONG;
-   repeat = pgm_read_word(&(pSong[SOUND_REPEAT_SONG]));
    durationNote = 0;
    state = SOUND_PLAY;          
    TIMSK0 |= (1<<OCIE0A);       
@@ -237,23 +318,10 @@ inline static void SOUND_Duration(void)
         TIFR0 |=(1<<OCF0A); //вот здесь сомнения
       }
       else{
-        if (repeat == LOOP){
-          indexNote = SOUND_START_SONG;
-          durationNote = 0;
-          return;
-        }
-        repeat--;
-        if (!repeat){
           state = SOUND_STOP;
           TIMSK0 &= ~(1<<OCIE0A); 
           PORT_SOUND &= ~(1<<PINX_SOUND);
           return;
-        }
-        else{
-          indexNote = SOUND_START_SONG;
-          durationNote = 0;
-        }
-        
       }        
     } 
  }
@@ -288,7 +356,6 @@ ISR(TIM0_OVF_vect)
   SOUND_Duration();
   //BUT_Debrief();
 }
-
 
 ISR(TIM0_COMPA_vect)
 {

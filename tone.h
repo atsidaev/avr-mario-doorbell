@@ -28,8 +28,8 @@
 *   
 *****************************************************************************/
 
-#define f(x) (SOUND_F_CPU*1000000UL/(x*2*SOUND_TIM_PRE))
-#define fn(x) ((x*SOUND_F_CPU)/SOUND_TIM_PRE)
+#define f(x) (F_CPU/(x*2*SOUND_TIM_PRE))
+#define fn(x) ((x*F_CPU)/(1000000UL * SOUND_TIM_PRE))
 
 #ifdef SOUND_BPM
   #define COEF SOUND_BPM
@@ -37,8 +37,8 @@
   #define COEF 1
 #endif
 
-#define dn(x) ((24U*SOUND_F_CPU*1000000UL)/(x*SOUND_TIM_PRE*256UL*32UL)/COEF)
-#define ms(x) (((x)*SOUND_F_CPU*1000UL)/(SOUND_TIM_PRE*256UL*32UL))
+#define dn(x) ((24U*F_CPU)/(x*SOUND_TIM_PRE*256UL*32UL)/COEF)
+#define ms(x) (((x)*F_CPU)/(SOUND_TIM_PRE*256UL*32UL*1000UL))
 
 #define n1  dn(1)    //целая нота
 #define n2  dn(2)    //половинная нота
