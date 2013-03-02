@@ -12,9 +12,12 @@ int main(void)
 	sei();
 	
 	SOUND_PlaySong(0);
-	//SOUND_Com(SOUND_PLAY);
-	while (1)
+
+label:
+	while (/*SOUND_GetStatus() == SOUND_PLAY*/1)
 	{
 		
 	}
+	SOUND_PlaySong(0);
+	//goto label;
 }

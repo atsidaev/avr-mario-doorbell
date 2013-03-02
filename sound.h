@@ -46,5 +46,6 @@ void SOUND_Init(void);
 void SOUND_SetSong(unsigned char numSong);
 void SOUND_Com(unsigned char com);
 void SOUND_PlaySong(unsigned char numSong);
+unsigned char SOUND_GetStatus();
 
 #endif //SOUND_H

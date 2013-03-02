@@ -22,8 +22,7 @@
 #define F5 F1
 #define G5 G1
 
-
-#define NOTE(x,l) ms(l), (x == P ? P : x*3)
+#define NOTE(x,l) ms(l), (x == P ? P : x * 71 / 10)
 
 //~ E,E,E,C,E,G,G,C,G,E,A,B,A#,G,E,G,A,F,G,E ,C,D,B,C,G,E,A,B,A#, G,E,G,A,F,G,E,C,D,B
 
@@ -34,51 +33,57 @@
 //const char simpsons[] PROGMEM = "d=4,o=5,b=160:c.6,e6,f#6,8a6,g.6,e6,c6,8a,8f#,8f#,8f#,2g,8p,8p,8f#,8f#,8f#,8g,a#.,8c6,8c6,8c6,c6";
 
 PROGMEM const unsigned int FurElise[] =   
-        {
-NOTE(f(1046), 491),
-NOTE(P, 70),
-NOTE(f(1318), 328),
-NOTE(P, 46),
-NOTE(f(1479), 328),
-NOTE(P, 46),
-NOTE(f(1760), 163),
-NOTE(P, 23),
-NOTE(f(1567), 491),
-NOTE(P, 70),
-NOTE(f(1318), 328),
-NOTE(P, 46),
-NOTE(f(1046), 328),
-NOTE(P, 46),
-NOTE(f(880), 163),
-NOTE(P, 23),
-NOTE(f(739), 163),
-NOTE(P, 23),
-NOTE(f(739), 163),
-NOTE(P, 23),
-NOTE(f(739), 163),
-NOTE(P, 23),
-NOTE(f(783), 656),
-NOTE(P, 93),
-NOTE(P, 187),
-NOTE(P, 187),
-NOTE(f(739), 163),
-NOTE(P, 23),
-NOTE(f(739), 163),
-NOTE(P, 23),
-NOTE(f(739), 163),
-NOTE(P, 23),
-NOTE(f(783), 163),
-NOTE(P, 23),
-NOTE(f(932), 491),
-NOTE(P, 70),
-NOTE(f(1046), 163),
-NOTE(P, 23),
-NOTE(f(1046), 163),
-NOTE(P, 23),
-NOTE(f(1046), 163),
-NOTE(P, 23),
-NOTE(f(1046), 328),
-NOTE(P, 46),
+        {NOTE(f(1318), 131),
+NOTE(f(1318), 131),
+NOTE(P, 75),
+NOTE(f(1318), 262),
+NOTE(f(1046), 131),
+NOTE(f(1318), 262),
+NOTE(f(1567), 262),
+NOTE(P, 300),
+NOTE(f(783), 262),
+NOTE(P, 300),
+NOTE(f(1046), 262),
+NOTE(P, 150),
+NOTE(f(783), 262),
+NOTE(P, 150),
+NOTE(f(659), 262),
+NOTE(P, 150),
+NOTE(f(880), 262),
+NOTE(f(987), 262),
+NOTE(f(932), 131),
+NOTE(f(880), 262),
+NOTE(f(783), 196),
+NOTE(f(1318), 131),
+NOTE(f(1567), 131),
+NOTE(f(1760), 262),
+NOTE(f(1396), 131),
+NOTE(f(1567), 262),
+NOTE(f(1318), 262),
+NOTE(f(1046), 131),
+NOTE(f(1174), 131),
+NOTE(f(987), 262),
+NOTE(P, 150),
+NOTE(f(1046), 262),
+NOTE(P, 150),
+NOTE(f(783), 262),
+NOTE(P, 150),
+NOTE(f(659), 262),
+NOTE(P, 150),
+NOTE(f(880), 262),
+NOTE(f(987), 262),
+NOTE(f(932), 131),
+NOTE(f(880), 262),
+NOTE(f(783), 196),
+NOTE(f(1318), 131),
+NOTE(f(1567), 131),
+NOTE(f(1760), 262),
+
+
+
+
+
+
 
 
            
@@ -288,6 +293,8 @@ void SOUND_PlaySong(unsigned char numSong)
    TIMSK0 |= (1<<OCIE0A);       
 }
 
+int volatile durationCopy = 1;
+
 inline static void SOUND_Duration(void)
 {
   static unsigned char counter = 0;
@@ -301,11 +308,22 @@ inline static void SOUND_Duration(void)
        }
     }
     else {
+		if (indexNote % 2 == 0 && durationCopy != 0)
+		{
+			toneNote = P;
+			durationNote = durationCopy >> 2;
+			durationCopy = 0;
+			statReg &= ~(1<<SOUND_VOLUME);
+			TIFR0 |=(1<<OCF0A); //вот здесь сомнения
+			return;
+		}
+		
       durationNote = pgm_read_word(&(pSong[indexNote]));
       if (durationNote) {
 #ifndef SOUND_BPM
         durationNote = durationNote/bpm;
 #endif
+		durationCopy = durationNote;
         indexNote++;
         toneNote = pgm_read_word(&(pSong[indexNote]));
         if (toneNote!=P) {
@@ -350,6 +368,11 @@ inline static void SOUND_Tone(void)
   }
 }
 
+unsigned char SOUND_GetStatus()
+{
+	return state;
+}
+
 //прерывания таймера Т2_____________________________________
 ISR(TIM0_OVF_vect)
 {
@@ -361,3 +384,4 @@ ISR(TIM0_COMPA_vect)
 {
   SOUND_Tone();
 }
+
