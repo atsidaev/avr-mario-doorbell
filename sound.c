@@ -24,198 +24,53 @@
 
 #define NOTE(x,l) ms(l), (x == P ? P : x * 71 / 10)
 
-//~ E,E,E,C,E,G,G,C,G,E,A,B,A#,G,E,G,A,F,G,E ,C,D,B,C,G,E,A,B,A#, G,E,G,A,F,G,E,C,D,B
-
-//~ G,F#,F,D#,E,G#,A,,C,A,C,D,G,F#,F,E,C,C,C ,G ,F#, F,D#,E,G#A,C,A,C,D,D#,D,C
-
-//~ C,C,C,C,D,E,C,A,G,C,C,C,C,D,E,C,C,C,C,D, E,C, A,G,E,E,E,C,E,G,G,E,C,G,G#,A,F,F,A,B,A,A , A,G, F,E,C,A,G,E,C,G,G#,A,F,F,A,B,F,F,F,E,D,C
-
-//const char simpsons[] PROGMEM = "d=4,o=5,b=160:c.6,e6,f#6,8a6,g.6,e6,c6,8a,8f#,8f#,8f#,2g,8p,8p,8f#,8f#,8f#,8g,a#.,8c6,8c6,8c6,c6";
-
-PROGMEM const unsigned int FurElise[] =   
+PROGMEM const unsigned int SuperMario[] =   
 {
-	NOTE(f(1318), 131),
-	NOTE(f(1318), 131),
-	NOTE(P, 75),
-	NOTE(f(1318), 262),
-	NOTE(f(1046), 131),
-	NOTE(f(1318), 262),
-	NOTE(f(1567), 262),
-	NOTE(P, 300),
-	NOTE(f(783), 262),
-	NOTE(P, 300),
-	NOTE(f(1046), 262),
-	NOTE(P, 150),
-	NOTE(f(783), 262),
-	NOTE(P, 150),
-	NOTE(f(659), 262),
-	NOTE(P, 150),
-	NOTE(f(880), 262),
-	NOTE(f(987), 262),
-	NOTE(f(932), 131),
-	NOTE(f(880), 262),
-	NOTE(f(783), 196),
-	NOTE(f(1318), 131),
-	NOTE(f(1567), 131),
-	NOTE(f(1760), 262),
-	NOTE(f(1396), 131),
-	NOTE(f(1567), 262),
-	NOTE(f(1318), 262),
-	NOTE(f(1046), 131),
-	NOTE(f(1174), 131),
-	NOTE(f(987), 262),
-	NOTE(P, 150),
-	NOTE(f(1046), 262),
-	NOTE(P, 150),
-	NOTE(f(783), 262),
-	NOTE(P, 150),
-	NOTE(f(659), 262),
-	NOTE(P, 150),
-	//~ NOTE(f(880), 262),
-	//~ NOTE(f(987), 262),
-	//~ NOTE(f(932), 131),
-	//~ NOTE(f(880), 262),
-	//~ NOTE(f(783), 196),
-	//~ NOTE(f(1318), 131),
-	//~ NOTE(f(1567), 131),
-	//~ NOTE(f(1760), 262),
-
-
-
-
-
-
-
-
-           
-           //~ NOTE(E6,16),
-			//~ NOTE(E6,16),
-			//~ NOTE(P,32),
-			//~ NOTE(E6,8),
-			//~ NOTE(C6,16),
-			//~ NOTE(E6,8),
-			//~ NOTE(G6,8),
-			//~ NOTE(P,8),
-			//~ NOTE(G6,8),
-			//~ NOTE(P,8),
-			//~ NOTE(C6,8),
-			//~ NOTE(P,16),
-			//~ NOTE(G6,8),
-			//~ NOTE(P,16),
-			//~ NOTE(E6,8),
-			//~ NOTE(P,16),
-			//~ NOTE(A6,8),
-			//~ NOTE(B6,8),
-			//~ NOTE(Ax6,16),
-			//~ NOTE(A6,8),
-			//~ NOTE(G6,16),
-			//~ NOTE(E6,16),
-			//~ NOTE(G6,16),
-			//~ NOTE(A6,8),
-			//~ NOTE(F6,16),
-			//~ NOTE(G6,8),
-			//~ NOTE(E6,8),
-			//~ NOTE(C6,16),
-			//~ NOTE(D6,16),
-			//~ NOTE(B6,8),
-			//~ NOTE(P,16),
-			//~ NOTE(C6,8),
-			//~ NOTE(P,16),
-			//~ NOTE(G6,8),
-			//~ NOTE(P,16),
-			//~ NOTE(E6,8),
-			//~ NOTE(P,16),
-			//~ NOTE(A,8),
-			//~ NOTE(B,8),
-			//~ NOTE(A#,16),
-			//~ NOTE(A,8),
-			//~ NOTE(G.,16),
-			//~ NOTE(E6,16),
-			//~ NOTE(G6,16),
-			//~ NOTE(A6,8),
-			//~ NOTE(F6,16),
-			//~ NOTE(G6,8),
-			//~ NOTE(E6,8),
-			//~ NOTE(C6,16),
-			//~ NOTE(D6,16),
-			//~ NOTE(B,8),
-			//~ NOTE(P,8),
-			//~ NOTE(G6,16),
-			//~ NOTE(F#6,16),
-			//~ NOTE(F6,16),
-			//~ NOTE(D#6,16),
-			//~ NOTE(P,16),
-			//~ NOTE(E6,16),
-			//~ NOTE(P,16),
-			//~ NOTE(G#,16),
-			//~ NOTE(A,16),
-			//~ NOTE(C6,16),
-			//~ NOTE(P,16),
-			//~ NOTE(A,16),
-			//~ NOTE(C6,16),
-			//~ NOTE(D6,16),
-			//~ NOTE(P,8),
-			//~ NOTE(G6,16),
-			//~ NOTE(F#6,16),
-			//~ NOTE(F6,16),
-			//~ NOTE(D#6,16),
-			//~ NOTE(P,16),
-			//~ NOTE(E6,16),
-			//~ NOTE(P,16),
-			//~ NOTE(C7,16),
-			//~ NOTE(P,16),
-			//~ NOTE(C7,16),
-			//~ NOTE(C7,16)
-          
-            //~ NOTE(p, 100),
-            //~ NOTE(E6,59),
-			//~ NOTE(p,10),
-			//~ NOTE(E6,59),
-			//~ NOTE(p,61),
-			//~ NOTE(E6,59),
-			//~ NOTE(p,61),
-			//~ NOTE(C6,59),
-			//~ NOTE(p,1),
-			//~ NOTE(E6,119),
-			//~ NOTE(p,1),
-			//~ NOTE(G6,119),
-			//~ NOTE(p,121),
-			//~ NOTE(G5,119),
-			//~ NOTE(p,121),
-			//~ 
-			//~ NOTE(C6,119),
-			//~ NOTE(p,61),
-			//~ NOTE(G5,59),
-			//~ NOTE(p,121),
-			//~ NOTE(E5,119),
-			//~ NOTE(p,61),
-			//~ NOTE(A5,59),
-			//~ NOTE(p,61),
-			//~ NOTE(B5,59),
-			//~ NOTE(p,61),
-			
-			//~ NOTE(Ax5,59),
-			//~ NOTE(p,61),
-			//~ NOTE(Gx5,59),
-			//~ NOTE(p,1),
-			//~ NOTE(A5,119),
-			//~ NOTE(p,1),
-			//~ NOTE(G5,79),
-			//~ NOTE(p,1),
-			//~ NOTE(E6,79),
-			//~ NOTE(p,1),
-			//~ NOTE(G6,79),
-			//~ NOTE(p,1),
-			//~ NOTE(A6,119),
-			//~ NOTE(p,1),
-			//~ NOTE(F6,59),
-			//~ 
-            //~ n8,e2, n8,xd2, n8,e2, n8,xd2, n8,e2, n8,b1, n8,d2, n8,c2, n4,a1, n8,p, 
-            //~ n8,c1, n8,e1, n8,a1, n4,b1, n8,p, n8,e1, n8,xg1, n8,b1, n4,c2, n8,p, n8,e1, 
-            //~ n8,e2, n8,xd2, n8,e2, n8,xd2, n8,e2, n8,b1, n8,d2, n8,c2, n4,a1, n8,p, n8,c1, 
-            //~ n8,e1, n8,a1, n4,b1, n8,p, n8,e1, n8,c2, n8,b1, n4,a1, 
-            0
-        };
+		NOTE(f(1318), 131),
+		NOTE(f(1318), 131),
+		NOTE(P, 75),
+		NOTE(f(1318), 262),
+		NOTE(f(1046), 131),
+		NOTE(f(1318), 262),
+		NOTE(f(1567), 262),
+		NOTE(P, 300),
+		NOTE(f(783), 262),
+		NOTE(P, 300),
+		
+		NOTE(f(1046), 262),
+		NOTE(P, 150),
+		NOTE(f(783), 262),
+		NOTE(P, 150),
+		NOTE(f(659), 262),
+		NOTE(P, 150),
+		NOTE(f(880), 262),
+		NOTE(f(987), 262),
+		NOTE(f(932), 131),
+		NOTE(f(880), 262),
+		NOTE(f(783), 196),
+		
+		NOTE(f(1318), 131),
+		NOTE(f(1567), 131),
+		NOTE(f(1760), 262),
+		NOTE(P, 30),
+		NOTE(f(1396), 131),
+		NOTE(f(1567), 262),
+		NOTE(P, 15),
+		NOTE(f(1318), 262),
+		NOTE(P, 15),
+		NOTE(f(1046), 131),
+		NOTE(f(1174), 131),
+		NOTE(f(987), 262),
+		
+		NOTE(P, 150),
+		NOTE(f(1046), 262),
+		NOTE(P, 150),
+		NOTE(f(783), 262),
+		NOTE(P, 150),
+		NOTE(f(659), 262),
+		NOTE(P, 150),
+        0
+};
 
 
 //-----------------------------звуковой модуль----------------------------------
@@ -223,7 +78,7 @@ PROGMEM const unsigned int FurElise[] =
 #define PIN_SOUND (*(&PORT_SOUND-2))
 #define DDR_SOUND (*(&PORT_SOUND-1))
 
-PGM_P const melody[] PROGMEM = { FurElise };
+PGM_P const melody[] PROGMEM = { SuperMario };
 
 //переменные звукового модуля
 volatile static unsigned int *pSong;
@@ -261,7 +116,7 @@ void SOUND_Init(void)
   OCR0A = 0;
    
   //инициализация переменных
-  pSong = (unsigned int *)pgm_read_word(&(FurElise));
+  pSong = (unsigned int *)pgm_read_word(&(SuperMario));
   state = SOUND_STOP;
   durationNote = 0;
   toneNote = 0;

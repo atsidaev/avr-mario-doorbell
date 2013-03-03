@@ -28,7 +28,7 @@
 *   
 *****************************************************************************/
 
-#define f(x) (F_CPU/(x*2*SOUND_TIM_PRE))
+#define f(x) (F_CPU/((x)*2*SOUND_TIM_PRE))
 #define fn(x) ((x*F_CPU)/(1000000UL * SOUND_TIM_PRE))
 
 #ifdef SOUND_BPM

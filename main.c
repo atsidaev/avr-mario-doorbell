@@ -16,19 +16,15 @@ int main(void)
 	
 	SOUND_Init();
 	MCUCR &= ~((1 << ISC01) | (1 << ISC00));
-	GIMSK |= (1 << INT0);
 	set_sleep_mode(SLEEP_MODE_PWR_DOWN);
 	sleep_enable();
 
 sleep:
-	//~ cli();
-	//~ power_spi_disable();
-	//~ power_timer0_disable();
-	//~ power_timer1_disable();
-	//~ power_twi_disable(); 
+	cli();
+	GIMSK |= (1 << INT0); // enable INT0
 	sei();
 	sleep_cpu();
-	//~ power_timer0_enable();
+	GIMSK &= ~(1 << INT0); // disable INT0
 
 	while (1)
 	{
