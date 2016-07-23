@@ -30,7 +30,7 @@
 
 #define NOTE(x,l) ms(l), (x == P ? P : x * 71 / 10)
 
-PROGMEM const unsigned int SuperMario[] =   
+PROGMEM const unsigned int SuperMario[] =
 {
 		NOTE(f(1318), 131),
 		NOTE(f(1318), 131),
@@ -78,13 +78,38 @@ PROGMEM const unsigned int SuperMario[] =
         0
 };
 
+PROGMEM const unsigned int StarWars[] = 
+{
+	NOTE(P, 166),
+	NOTE(f(739), 145),
+	NOTE(f(739), 145),
+	NOTE(f(739), 145),
+	NOTE(f(987), 875),
+	NOTE(f(1479), 875),
+	NOTE(f(1318), 145),
+	NOTE(f(1244), 145),
+	NOTE(f(1108), 145),
+	NOTE(f(1975), 875),
+	NOTE(f(1479), 437),
+	NOTE(f(1318), 145),
+	NOTE(f(1244), 145),
+	NOTE(f(1108), 145),
+	NOTE(f(1975), 875),
+	NOTE(f(1479), 437),
+	NOTE(f(1318), 145),
+	NOTE(f(1244), 145),
+	NOTE(f(1318), 145),
+	NOTE(f(1108), 875),
+
+	0
+};
 
 //-----------------------------звуковой модуль----------------------------------
 //указатели на регистры порта
 #define PIN_SOUND (*(&PORT_SOUND-2))
 #define DDR_SOUND (*(&PORT_SOUND-1))
 
-PGM_P const melody[] PROGMEM = { SuperMario };
+PGM_P const melody[] PROGMEM = { SuperMario, StarWars };
 
 //переменные звукового модуля
 volatile static unsigned int *pSong;
@@ -113,14 +138,14 @@ void SOUND_Init(void)
   //настройка вывода мк на выход
   PORT_SOUND &= ~(1<<PINX_SOUND);
   DDR_SOUND |= (1<<PINX_SOUND);
-  
+
   //настройка таймера T0
   TIMSK0 |= (1<<TOIE0);   
   TCCR0A = (0<<WGM01)|(0<<WGM00);  //режим - нормал, прескалер - 
   TCCR0B = (0<<CS02)|(0<<CS01)|(1<<CS00);
-  TCNT0 = 0;    
+  TCNT0 = 0;
   OCR0A = 0;
-   
+
   //инициализация переменных
   pSong = (unsigned int *)pgm_read_word(&(SuperMario));
   state = SOUND_STOP;
@@ -128,16 +153,9 @@ void SOUND_Init(void)
   toneNote = 0;
   indexNote = 0;
   statReg = 0;
-#ifndef SOUND_BPM  
+#ifndef SOUND_BPM
   bpm = 0;
 #endif
-}
-
-void SOUND_SetSong(unsigned char numSong)
-{
-    if (numSong <= SOUND_AMOUNT_MELODY) {
-      pSong = (unsigned int *)pgm_read_word(&(melody[numSong]));
-    }
 }
 
 //проиграть мелодию под номером numSong
@@ -176,7 +194,6 @@ inline static void SOUND_Duration(void)
 			durationNote = durationCopy >> 2;
 			durationCopy = 0;
 			statReg &= ~(1<<SOUND_VOLUME);
-			TIFR0 |=(1<<OCF0A); //вот здесь сомнения
 			return;
 		}
 		
@@ -195,7 +212,6 @@ inline static void SOUND_Duration(void)
           statReg &= ~(1<<SOUND_VOLUME);
         }
         indexNote++;
-        TIFR0 |=(1<<OCF0A); //вот здесь сомнения
       }
       else{
           state = SOUND_STOP;
@@ -212,7 +228,7 @@ inline static void SOUND_Duration(void)
 inline static void SOUND_Tone(void)
 {
   static unsigned int tone = 0;
-  
+
   if (statReg & (1<<SOUND_GEN)){
     if (statReg & (1<<SOUND_VOLUME)){
        PORT_SOUND ^= (1<<PINX_SOUND);

@@ -31,15 +31,22 @@ sleep:
 	/* The only reason to wake up is the button press. So if we are here, then we can start play melody without any additional checks. */
 	GIMSK &= ~(1 << INT0); // disable INT0, we do not need it until next sleep
 
-	while (1)
+	while (1) /* This is needed to allow two or more sequental melody plays when button was not released since interrupt */
 	{
 		
 		if (!(PINB & (1<<PINB1)))
 		{
+			unsigned int ticks = 0xFFFF;
 			SOUND_PlaySong(0);
 			
 			while (SOUND_GetStatus() == SOUND_PLAY)
 			{
+				if (ticks > 0 && !(PINB & (1<<PINB1)))
+				{
+					ticks--;
+					if (ticks == 0)
+						SOUND_PlaySong(1);
+				}
 				// Running empty loop until the music stops
 			}
 		}
@@ -48,7 +55,8 @@ sleep:
 	}
 }
 
-/* We do not perform any ISR handling routing because we already know that if we woke up, then the interrupt happened */
-ISR(INT0_vect)
+/* We do not perform any ISR handling routine because we already know that if we woke up, then the interrupt happened */
+ISR(INT0_vect, ISR_NAKED)
 {
+	asm volatile("reti");
 }
