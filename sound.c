@@ -1,5 +1,11 @@
 #include "sound.h"
 
+/*
+  Comments are in Russian because I copypasted most of this file from Russian forum
+  http://electronix.ru/forum/lofiversion/index.php/t99525.html
+  (thanks to Sergey529)
+*/
+
 #define LOOP 0xff
 
 #define A6 A2
@@ -179,7 +185,7 @@ inline static void SOUND_Duration(void)
 #ifndef SOUND_BPM
         durationNote = durationNote/bpm;
 #endif
-		durationCopy = durationNote;
+        durationCopy = durationNote;
         indexNote++;
         toneNote = pgm_read_word(&(pSong[indexNote]));
         if (toneNote!=P) {
@@ -196,10 +202,10 @@ inline static void SOUND_Duration(void)
           TIMSK0 &= ~(1<<OCIE0A); 
           PORT_SOUND &= ~(1<<PINX_SOUND);
           return;
-      }        
-    } 
+      }
+    }
  }
-  
+
 }
 
 

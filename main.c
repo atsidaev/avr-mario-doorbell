@@ -10,6 +10,7 @@
 
 int main(void)
 {
+	/* Initial setup */
 	cli();
 	DDRB &= ~(1<<BUTTON);
 	PORTB |= (1<<BUTTON);
@@ -19,12 +20,16 @@ int main(void)
 	set_sleep_mode(SLEEP_MODE_PWR_DOWN);
 	sleep_enable();
 
+	/* Waiting for the door bell button press */
 sleep:
 	cli();
-	GIMSK |= (1 << INT0); // enable INT0
+	GIMSK |= (1 << INT0); // enable INT0 diring the sleep_cpu execution
 	sei();
 	sleep_cpu();
-	GIMSK &= ~(1 << INT0); // disable INT0
+
+	/* All code below is the interrupt handler (kinda) */
+	/* The only reason to wake up is the button press. So if we are here, then we can start play melody without any additional checks. */
+	GIMSK &= ~(1 << INT0); // disable INT0, we do not need it until next sleep
 
 	while (1)
 	{
@@ -35,7 +40,7 @@ sleep:
 			
 			while (SOUND_GetStatus() == SOUND_PLAY)
 			{
-			
+				// Running empty loop until the music stops
 			}
 		}
 		else
@@ -43,6 +48,7 @@ sleep:
 	}
 }
 
+/* We do not perform any ISR handling routing because we already know that if we woke up, then the interrupt happened */
 ISR(INT0_vect)
 {
 }
