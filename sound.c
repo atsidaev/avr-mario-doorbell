@@ -31,75 +31,13 @@
 
 PROGMEM const unsigned int SuperMario[] =
 {
-		NOTE(f(1318), 131),
-		NOTE(f(1318), 131),
-		NOTE(P, 75),
-		NOTE(f(1318), 262),
-		NOTE(f(1046), 131),
-		NOTE(f(1318), 262),
-		NOTE(f(1567), 262),
-		NOTE(P, 300),
-		NOTE(f(783), 262),
-		NOTE(P, 300),
-		
-		NOTE(f(1046), 262),
-		NOTE(P, 150),
-		NOTE(f(783), 262),
-		NOTE(P, 150),
-		NOTE(f(659), 262),
-		NOTE(P, 150),
-		NOTE(f(880), 262),
-		NOTE(f(987), 262),
-		NOTE(f(932), 131),
-		NOTE(f(880), 262),
-		NOTE(f(783), 196),
-		
-		NOTE(f(1318), 131),
-		NOTE(f(1567), 131),
-		NOTE(f(1760), 262),
-		NOTE(P, 30),
-		NOTE(f(1396), 131),
-		NOTE(f(1567), 262),
-		NOTE(P, 15),
-		NOTE(f(1318), 262),
-		NOTE(P, 15),
-		NOTE(f(1046), 131),
-		NOTE(f(1174), 131),
-		NOTE(f(987), 262),
-		
-		NOTE(P, 150),
-		NOTE(f(1046), 262),
-		NOTE(P, 150),
-		NOTE(f(783), 262),
-		NOTE(P, 150),
-		NOTE(f(659), 262),
-		NOTE(P, 150),
+#include "melodies/smb_short.inc"
         0
 };
 
 PROGMEM const unsigned int StarWars[] = 
 {
-	NOTE(P, 166),
-	NOTE(f(739), 145),
-	NOTE(f(739), 145),
-	NOTE(f(739), 145),
-	NOTE(f(987), 875),
-	NOTE(f(1479), 875),
-	NOTE(f(1318), 145),
-	NOTE(f(1244), 145),
-	NOTE(f(1108), 145),
-	NOTE(f(1975), 875),
-	NOTE(f(1479), 437),
-	NOTE(f(1318), 145),
-	NOTE(f(1244), 145),
-	NOTE(f(1108), 145),
-	NOTE(f(1975), 875),
-	NOTE(f(1479), 437),
-	NOTE(f(1318), 145),
-	NOTE(f(1244), 145),
-	NOTE(f(1318), 145),
-	NOTE(f(1108), 875),
-
+#include "melodies/StarWars_short.inc"
 	0
 };
 
