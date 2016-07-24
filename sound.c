@@ -1,9 +1,8 @@
 #include "sound.h"
 
 /*
-  Comments are in Russian because I copypasted most of this file from Russian forum
-  http://electronix.ru/forum/lofiversion/index.php/t99525.html
-  (thanks to Sergey529)
+  Based on SoundLib by Pashgan
+  (http://chipenable.ru/index.php/programming-avr/item/89-generatsiya-zvuka-s-pomoschyu-avr-ozvuch-svoy-devays.html)
 */
 
 #define LOOP 0xff
